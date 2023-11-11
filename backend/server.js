@@ -26,10 +26,10 @@ app.use(session({
 }))
 
 const db = mysql.createConnection({
-    host: "sql3.freesqldatabase.com",
-    user:"sql3659622",
-    password:"57jf3XmS5Y",
-    database: "sql3659622"
+    host: "localhost",
+    user:"root",
+    password:"",
+    database: "konnecct-elearning"
 })
 
 console.log('connected to the database');
