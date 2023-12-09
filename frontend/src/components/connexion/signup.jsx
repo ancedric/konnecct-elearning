@@ -77,7 +77,6 @@ function Signup(){
     function handleSubmit (event) {
         event.preventDefault();
         setErrors(validation(values));
-        {/*if(errors.firstName === "" && errors.lastName === "" && errors.birthDate === "" && errors.email === "" && errors.password === "" && errors.country === ""){*/}
             console.log(values);
             axios.post('http://localhost:8081/signup', values)
             .then(res => 
@@ -87,7 +86,6 @@ function Signup(){
             )
             .catch(err => console.log(err));
                 }
-    {/*}*/}
     return(
         <StyledSignup>
             <StyledForm><h2 className='form-title' >Sign Up</h2>

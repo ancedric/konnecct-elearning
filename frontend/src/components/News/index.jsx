@@ -4,38 +4,63 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const StyledNews= Styled.div`
-    background-color: #E0E0E0;
-    height: 700px;
+    display: flex;
+    flex direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 40vh;
+    width: 80vw;
+    @media(max-width: 450px){
+      flex-direction: column;
+    }
 `
 const NewsBlock= Styled.div`
-    width:500px;
-    height:500px;
+    width:45%;
+    height:80%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    background-color:#9FF6C5;
-    position:absolute;
-    left:200px;
-    top:700px;
-    @keyframes slideInLeft {
-        0% {
-          transform: translateX(-100%);
+    @media(max-width: 450px){
+        width: 80%;
+        height: 40%;
+      }
+
+      .rate{
+        display : flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 30%;
+        color:#f0aa5b;
+        font-size: 22px;
+          @media screen and(max-width: 450px){
+          font-size: 16px;
         }
-        100% {
-          transform: translateX(0);
+        h1, p{
+          margin: 5px;
         }
       }
-      animation: 1s ease-out 0s 1 slideInLeft;
 `
 const NewsIllus= Styled.div`
-    width:500px;
-    height:400px;
-    background-color:#fff;
-    z-index:4;
-    position: absolute;
-    right: 250px;
-    top: 750px;
+    display: flex;
+    flex-direction: column;
+    width:45%;
+    height:80%;
+    justify-content: center;
+    align-items: center;
+    .marketing{
+      width: 80%;
+      font-size: 16px;
+      text-align left;
+    }
+    .socials{
+      font-size: 10px;
+    }
+    @media(maxwidth:450px;){
+      width: 80%;
+      height:45%;
+    }
 `
 
 function News() {
@@ -48,12 +73,23 @@ function News() {
     },[])
     return (
         <StyledNews>
-            <NewsBlock data-aos = "slide-left">
-                <h1>Latest News</h1>
-                <p>Welcome to our news page!</p>
+            <NewsBlock>
+                <div className="rate">
+                  <h1>10k</h1>
+                  <p>Active students</p>
+                </div>
+                <div className="rate">
+                  <h1>4.7/5</h1>
+                  <p>2.590 rating</p>
+                </div>
             </NewsBlock>
-            <NewsIllus data-aos = "slide-right">
-                <img src='./Banner/Slides/cours.png' alt=''/>
+            <NewsIllus>
+            <div className="marketing">
+              <p>Trusted by 25,000+ happy students are joining with us to achieve their goals.</p>
+              <div className="socials">Also faetured in<br/>
+                facebook twitter intagram
+              </div>
+            </div>
             </NewsIllus>
         </StyledNews>
     );

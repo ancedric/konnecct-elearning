@@ -1,39 +1,74 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import InteractiveVideo from "./Slides/interactive-videos.png"
+import FreeTimingLearning from "./Slides/free-timing-learning.png"
+import DynamicClassrooms from "./Slides/dynamicclassrooms.png"
+import CertifiedCourses  from "./Slides/certified-courses.png"
 
 const SliderContainer= styled.div`
     display: flex;
     flex-direction: row;
-    height: 500px;
-    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    height: 100dvh;
+    min-width: 100vw;
     background-image: linear-gradient(to right, #73AAFD, rgba(255,255,255,0));
+    @media(max-width: 450px){
+      flex-direction:column;
+    }
   `
-
+  const StyledSlideImage= styled.div`
+  align-items: center;
+  width:45%;
+  height:80%;
+  @media(max-width:450px){
+    height:45%;
+    width:80%;
+  }
+`
 const StyledOverlay = styled.div`
-    width: 100%;
-    position: absolute;
-    top: 10;
-    transform: translateY(160%);
-    left: 30;
-    padding: 0.4rem 1.5 rem;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+    order:-1;
+    width: 45%;
+    background-color: rgba(0,0,0,0.3);
     color: #fff;
-    text-align: center;
+    text-align: left;
+    padding: 15px;
+    @media(max-width: 450px){
+      justify-content: flex-start;
+      order:0;
+      font-size:10px;
+      text-align: center;
+      width: 80%;
+      background-color: rgba(0,0,0,0.3);
+    }
 `
 
 const StyledCta= styled.div`
     background-color: #1F869C;
-    width: 180px;
-    height:30px;
-    border-radius: 50px;
+    width: 150px;
+    padding:10px;
     margin: auto;
     font-weight: bold;
+    color:#fff;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all ease-in-out  0.3s;
     &:hover{
-      background-color: #DE7E2A;
+      background-color: #03fce3;
+      outline: 3px solid #fff;
+      outline offset: -3px;
+    }
+    @media(max-with:450px){
+      font-size:10px;
     }
 `
 const StyledCarousel= styled(Carousel)`
@@ -42,60 +77,50 @@ const StyledCarousel= styled(Carousel)`
       display:none;
     }
 `
-const StyledSlideImage= styled.div`
-    width:45%;
-    height:320px;
-    position: absolute;
-    top: 140px;
-    left: 680px;
-    background-color: orange;
-`
+
    
 function Banner(){
-
-  const sliderData = [
-    {
-        id: 1,
-        image:"./Slides/interactive-videos.png",
-        title: "Interactive videos courses",
-        text: "A new design learning with interactive videos, to immerge the student in the course",
-        cta: "Discover now"
-    },
-    {
-        id: 2,
-        image: "./Slides/free-timing-learning.png",
-        title: "Learn at your own schedule",
-        text: "You can learn from everywhere, at your own time and rythm",
-        cta: "Try today"
-    },
-    {
-        id: 3,
-        image: "./Slides/dynamicclassrooms.png",
-        title: "Dynamic classrooms",
-        text: "Experience dynamism in the e-learning like never before, with the new learnig format",
-        cta: "You can do it now"
-    },
-    {
-        id: 4,
-        image: "./Slides/certified-courses.png",
-        title: "Certified courses",
-        text: "You can have a proof of your succees with certificate of completion, with our certificates",
-        cta: "Engage today"
-    }
-] 
-
+        useEffect(() => {
+          AOS.init({
+            duration: 600,
+            delay: 200
+          });
+        },[])
         return (
             <StyledCarousel autoPlay interval={4000} infiniteLoop showStatus={false}>
-              {sliderData.map((slide) => (
-                <SliderContainer key={slide.id}>
-                  <StyledSlideImage><img src={slide.image} alt="" /></StyledSlideImage>
+              
+                <SliderContainer>
+                  <StyledSlideImage><img src={InteractiveVideo} alt="" /></StyledSlideImage>
                   <StyledOverlay>
-                    <h2 className= "overlay_title">{slide.title}</h2>
-                    <p className= "overlay_text">{slide.text}</p>
-                    <StyledCta>{slide.cta}</StyledCta>
+                    <h2 className= "overlay_title" data-aos="slide-left">Interactive videos courses</h2>
+                    <p className= "overlay_text" data-aos="zoom-in">A new design learning with interactive videos, to immerge the student in the course</p>
+                    <Link to='/courses'><StyledCta data-aos="fade-in">Discover now</StyledCta></Link>
                   </StyledOverlay>
                 </SliderContainer>
-              ))}
+                <SliderContainer>
+                  <StyledSlideImage><img src={ FreeTimingLearning } alt="" /></StyledSlideImage>
+                  <StyledOverlay>
+                    <h2 className= "overlay_title" data-aos="slide-left">Learn at your own schedule</h2>
+                    <p className= "overlay_text" data-aos="zoom-in">You can learn from everywhere, at your own time and rythm</p>
+                    <Link to='/courses'><StyledCta data-aos="fade-in">Try today</StyledCta></Link>
+                  </StyledOverlay>
+                </SliderContainer>
+                <SliderContainer>
+                <StyledSlideImage><img src={ DynamicClassrooms } alt="" /></StyledSlideImage>
+                <StyledOverlay>
+                  <h2 className= "overlay_title" data-aos="slide-left">Dynamic classrooms</h2>
+                  <p className= "overlay_text" data-aos="zoom-in">Experience dynamism in the e-learning like never before, with the new learning format</p>
+                  <Link to='/courses'><StyledCta data-aos="fade-in">Let's go</StyledCta></Link>
+                </StyledOverlay>
+              </SliderContainer>
+              <SliderContainer>
+                <StyledSlideImage><img src={ CertifiedCourses } alt="" /></StyledSlideImage>
+                <StyledOverlay>
+                  <h2 className= "overlay_title">Certified courses</h2>
+                  <p className= "overlay_text">"You can have a proof of your succees with certificate of completion, with our certificates</p>
+                  <Link to='/courses'><StyledCta data-aos="fade-in">Engage today</StyledCta></Link>
+                </StyledOverlay>
+              </SliderContainer>
             </StyledCarousel>
           );
         }

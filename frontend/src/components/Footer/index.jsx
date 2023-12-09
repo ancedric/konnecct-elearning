@@ -1,132 +1,95 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Logo from '../../assets/Konnecct-logo.png'
 
-const StyledFooter = styled.footer`
-    background-color: #000;
-    height: 300px;
+const Container = styled.div`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 1400px;
-    width: 100%;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-align: center;
-    padding: 2rem 0;
-    .contact_bar{
-      background-color: #8482FF;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      align-items: center;
-      width: 100%;
-      height: 100px;
-      border-left: 1px solid #fff;
-      border-right: 1px solid #fff;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color:#fff;
+    padding: 5px;
+    margin-top: 5px;
+    @media(max-width: 450px){
+        flex-direction: column;
     }
-    .link{
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      &:hover{
-        background-color: #DE7E2A;
-      }
-    }
-    .cgu_bar{
-        background-color: #8482ff;
+    .about {
         display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        width: 100%;
-        height: 100px;
-        border-left: 1px solid #fff;
-        border-right: 1px solid #fff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
+        width: 40%;
     }
-    .footer_content{
+
+    .logo {
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+    .elements{
         display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-    }
-    .footer_menu{
-        width:50%;
-        height: 100%;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        text-align: left;
+        width: 15%;
     }
-    .our_society{
-        width:50%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
+
+    .title{
+        font-weight: bold;
     }
-    
+
+    .item{
+        list-style-type: none;
+        margin-bottom: 5px;
+        text-decoration: none;
+        color: #000;
+    }
 `
 
 const Footer = () => {
     return (
-        <StyledFooter>
-            <div className='contact_bar'>
-                <div className='link'>
-                    <h3>Contact</h3>
-                </div>
-                <div className='link'>
-                    <h3>Become an instructor</h3>
-                </div>
-                <div className='link'>
-                    <h3>Our Partners</h3>
-                </div>
-                <div className='link'>
-                    <h3>Rewards</h3>
-                </div>
+        <Container>
+            <div className='about'>
+                <div className='logo'><img src = {Logo} alt = "konnecct-elearning"/></div>
+                <div className='description'>Konnecct e-laerning ise a platform where you can learn many trending topics to enhence your competences, and get the job of yours dreams.</div>
             </div>
-            <div className='footer_menu'>
-                <div className='footer_content'>
-                <div className='offers'>
-                    <h3>Offers</h3>
-                    <p>Courses</p>
-                    <p>Jobs</p>
-                </div>
-                <div className='our_society'>
-                    <h3>Our Society</h3>
-                    <p>About us</p>
-                    <p>Subscribe to Newsletter</p>
-                    <form className="newsletter-form">
-                        <input type="email" placeholder="Enter your email" />
-                        <button type="submit">Subscribe</button>
-                        <p>Copyright © konnecct-eLearning 2023</p>
-                    </form>
-                </div>
-                </div>
-                <div className='copyright'>
-                    
-                </div>
+            <div className='elements'>
+                <div className='title'>Categories</div>
+                <ul className='list'>
+                <Link to ="/" className="item"><li className='item'>Backend developper</li></Link>
+                <Link to ="/" className="item"><li className='item'>Frontend developper</li></Link>
+                <Link to ="/" className="item"><li className='item'>UX/UI Designer</li></Link>
+                <Link to ="/" className="item"><li className='item'>English</li></Link>
+                <Link to ="/" className="item"><li className='item'>Mathematics</li></Link>
+                <Link to="/" className="item"><li className='item'>Programming & tech</li></Link>
+                </ul>
             </div>
-            <div className='cgu_bar'>
-                <div className='link'>
-                    <h3>Legal notice</h3>
-                </div>
-                <div className='link'>
-                    <h3>Data protection</h3>
-                </div>
-                <div className='link'>
-                    <h3>User conditions</h3>
-                </div>
-                <div className='link'>
-                    <img src='' alt=''/>
-                </div>
+            <div className='elements'>
+            <div className='title'>Community</div>
+                <ul className='list'>
+                <Link to ="/" className="item"><li className='item'>Event</li></Link>
+                <Link to ="/" className="item"><li className='item'>Forum</li></Link>
+                <Link to ="/" className="item"><li className='item'>Podcast</li></Link>                </ul>
             </div>
-        </StyledFooter>
+            <div className='element'>
+                <div className='title'>Support</div>
+                <ul className='list'>
+                <Link to ="/" className="item"><li className='item'>About us</li></Link>
+                <Link to ="/" className="item"><li className='item'>Our partners</li></Link>
+                <Link to ="/" className="item"><li className='item'>Become an instructor</li></Link>
+                <Link to ="/" className="item"><li className='item'>Users conditions</li></Link>
+                <Link to ="/" className="item"><li className='item'>Legal notice</li></Link>
+                <li className='item'>copyright konnecct-elearning 2024</li>
+                </ul>                
+            </div>
+        </Container>
+
+
+
+
     );
 };
 

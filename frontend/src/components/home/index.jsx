@@ -3,21 +3,18 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Menu from '../Menu/index.jsx';
 import Banner from '../Banner/index.jsx';
 import News from '../News/index.jsx';
-import SearchBar from '../SearchBar/index.jsx';
+import VideoCall from '../videocall/videocall.jsx';
+import PopularCourse from '../popularcourse/index.jsx';
+import CourseData from '../courses/coursedata.jsx';
+import Testimony from '../testimony/testimony.jsx';
 import Footer from '../Footer/index.jsx';
 import Styled from 'styled-components';
 
 const StyledHeader= Styled.div`
-  display: block;
-`
-const StyledMenu= Styled(Menu)`
-  position: absolute;
-  top:0;
-  left:0;
-  z-index:2;
+  display: flex;
+  flex-direction: column;
 `
 
 function Home() {
@@ -43,20 +40,22 @@ function Home() {
   },[name, navigate])
      console.log({name});
      const Notify = ()  => {
-      toast.success("Successfully logged in ", {
+      toast.success("Successfully logged in  ", {
         position: toast.POSITION.TOP_CENTER      })
      }
+
   return (
       <>
         <StyledHeader>
           {validation ? <Notify/>: null}
           <ToastContainer/>
           <Banner/>
-          <StyledMenu/>
-          <SearchBar/>
         </StyledHeader>
         <News/>
-  <Footer/>
+        <PopularCourse course={CourseData}/>
+        <VideoCall/>
+        <Testimony/>
+        <Footer/>
       </>
   );
 }
