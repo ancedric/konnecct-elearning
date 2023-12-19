@@ -79,7 +79,7 @@ function Signup(){
         setErrors(validation(values));
         {/*if(errors.firstName === "" && errors.lastName === "" && errors.birthDate === "" && errors.email === "" && errors.password === "" && errors.country === ""){*/}
             console.log(values);
-            axios.post('http://localhost:8081/signup', values)
+            axios.post(https://konnecct-server.onrender.com/signup', values)
             .then(res => 
                 {
                     console.log(res);
