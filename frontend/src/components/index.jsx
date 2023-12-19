@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-{/*import Menu from './Menu/index.jsx';
-import GlobalStyle from '../Assets/globalStyle.jsx';
 import Banner from './Banner/index.jsx';
 import News from './News/index.jsx';
 import SearchBar from './SearchBar/index.jsx';
@@ -26,7 +24,7 @@ function App() {
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    axios.get('http://localhost:8081')
+    axios.get('https://konnecct-server.onrender.com')
     .then(res => {
       console.log(res.data);
       if(res.data.valid){
@@ -41,10 +39,8 @@ function App() {
      console.log({name});
   return (
       <>Welcome {name}
-        {/*<GlobalStyle/>
         <StyledHeader>
           <Banner/>
-          <StyledMenu/>
           <SearchBar/>
         </StyledHeader>
         <News/>
