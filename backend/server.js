@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://konnecct.netlify.app"],
     methods: ["POST", "GET"],
     credentials: true
 }));
@@ -78,6 +78,6 @@ app.post('/signin', (req, res)=> {
     });
 })
 
-app.listen(8081, ()=>{
+app.listen("https://konnecct-server.onrender.com", ()=>{
     console.log("Connected to the server");
 })
