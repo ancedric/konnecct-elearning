@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(cors({
-    origin: ["https://konnecct.netlify.app"],
+    origin: ["https://konnecct-elearning.onrender.com"],
     methods: ["POST", "GET"],
     credentials: true
 }));
