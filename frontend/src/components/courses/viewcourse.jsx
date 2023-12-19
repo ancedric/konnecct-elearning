@@ -26,6 +26,7 @@ const CourseHeader= styled.div`
     color: #1F869C;
     font-weight: bold;
     font-size:20px;
+    
 `
 
 function ViewCourse() {

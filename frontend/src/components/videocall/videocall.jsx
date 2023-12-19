@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import '../../assets/video/free-online-courses-with-free-certificates.mp4';
 import SimpleVideoPlayer from '../videoplayer/simplevideoplayer.jsx';
 
 const Container = styled.div`
@@ -39,21 +40,21 @@ const Container = styled.div`
         width: 80%;
         height: 70%;
         margin: 10px;
-        border-radius: 5px;
+        border-radius: 20px;
     }
 `
 function VideoCall(){
-
+    const videourl=  '../../assets/video/free-online-courses-with-free-certificates.mp4';
     return(
         <Container>
             <div className="title-container">
                 <div className="title"><h3>Join your live class with your instructor via video chat</h3></div>
                 <div classNam="call-button">
-                <Link to='/bookcall'><button className="button">Join class</button></Link>
+                <Link to='/videochat'><button className="button">Join class</button></Link>
                 </div> 
             </div>
             <div className="video-player-container">
-                <SimpleVideoPlayer />
+                <SimpleVideoPlayer url={videourl} />
             </div>
         </Container>
     )

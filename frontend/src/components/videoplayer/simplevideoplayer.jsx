@@ -6,12 +6,12 @@ const VideoContainer= styled.div`
     width:80vw;
     height: 80vh;
 `
-function VideoPlayer(){
+function VideoPlayer({url}){
 
     return(
         <VideoContainer>
             <ReactPlayer
-                url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+                url = {url}
                 controls
                 playing
                 muted

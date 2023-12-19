@@ -12,7 +12,7 @@ const StyledLoginBar= Styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    min-width:100vw;
+    width:100vw;
     background-color: #fff;
     position: fixed;
     top: 0;

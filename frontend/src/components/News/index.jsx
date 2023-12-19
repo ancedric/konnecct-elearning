@@ -3,63 +3,52 @@ import Styled from 'styled-components';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const StyledNews= Styled.div`
+const Container= Styled.div`
     display: flex;
     flex direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 40vh;
-    width: 80vw;
-    @media(max-width: 450px){
-      flex-direction: column;
-    }
-`
-const NewsBlock= Styled.div`
-    width:45%;
-    height:80%;
-    display: flex;
-    flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    height: 50vh;
+    width: 100vw;
     @media(max-width: 450px){
-        width: 80%;
-        height: 40%;
-      }
+      flex-direction: column;
+      height: none;
+    }
 
-      .rate{
-        display : flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 30%;
-        color:#f0aa5b;
-        font-size: 22px;
-          @media screen and(max-width: 450px){
-          font-size: 16px;
-        }
-        h1, p{
-          margin: 5px;
-        }
+    .card{
+      width: 25%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      @media(max-width: 450px){
+        width: 80%;
       }
-`
-const NewsIllus= Styled.div`
-    display: flex;
-    flex-direction: column;
-    width:45%;
-    height:80%;
-    justify-content: center;
-    align-items: center;
-    .marketing{
-      width: 80%;
-      font-size: 16px;
-      text-align left;
     }
-    .socials{
-      font-size: 10px;
+    .title{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 85%;
+      height: 45%;
+      font-size: 22px;
+      font-weight: bold;
+      color: orange;
     }
-    @media(maxwidth:450px;){
-      width: 80%;
-      height:45%;
+
+    .text{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 85%;
+      height: 45%;
+      font-size: 12px;
     }
 `
 
@@ -72,26 +61,22 @@ function News() {
       });
     },[])
     return (
-        <StyledNews>
-            <NewsBlock>
-                <div className="rate">
-                  <h1>10k</h1>
-                  <p>Active students</p>
-                </div>
-                <div className="rate">
-                  <h1>4.7/5</h1>
-                  <p>2.590 rating</p>
-                </div>
-            </NewsBlock>
-            <NewsIllus>
-            <div className="marketing">
-              <p>Trusted by 25,000+ happy students are joining with us to achieve their goals.</p>
-              <div className="socials">Also faetured in<br/>
-                facebook twitter intagram
+        <Container>
+            <div className="card">
+              <div className="title"><h1>10k</h1></div>
+              <div className="text"><p>Active students</p></div>
+            </div>
+            <div className="card">
+            <div className="title"><h1>4.7/5</h1></div>
+            <div className="text"><p>2.590 rating</p></div>
+            </div>
+            <div className="card">
+              <div className="title"><p>Trusted by 25,000+ happy students.</p></div>
+              <div className="text"><p>Also faetured in<br/>
+                facebook, twitter, intagram, linkedin, youtube</p>
               </div>
             </div>
-            </NewsIllus>
-        </StyledNews>
+        </Container>
     );
 }
 

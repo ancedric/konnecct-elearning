@@ -5,6 +5,8 @@ const Container= styled.div`
     flex-direction: row;
     width 100vw;
     margin-bottom: 10px;
+    border: 2px solid #000;
+    border-radius: 20px;
     @media(max-width:450px){
         flex-direction: column;
     }
@@ -22,6 +24,9 @@ const Container= styled.div`
 
     .title{
         color: orange;
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
     }
 `
 
