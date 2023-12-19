@@ -16,7 +16,6 @@ const StyledSignup = styled.div`
     .form-title {
         @font-family: 'Epilogue-bold';
     }
-    @media screen(maxwidth: )
 `
 const StyledForm= styled.div`
     display: flex;
