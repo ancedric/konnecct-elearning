@@ -16,7 +16,6 @@ const StyledSignup = styled.div`
     .form-title {
         @font-family: 'Epilogue-bold';
     }
-    @media screen(maxwidth: )
 `
 const StyledForm= styled.div`
     display: flex;
@@ -78,7 +77,7 @@ function Signup(){
         event.preventDefault();
         setErrors(validation(values));
             console.log(values);
-            axios.post('http://localhost:8081/signup', values)
+            axios.post(https://konnecct-server.onrender.com/signup', values)
             .then(res => 
                 {
                     console.log(res);

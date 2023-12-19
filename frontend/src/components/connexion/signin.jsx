@@ -64,7 +64,7 @@ function Signin(){
     axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    axios.get('http://localhost:8081')
+    axios.get('https://konnecct-server.onrender.com')
     .then(res => {
       if(res.data.valid){
         navigate('/home')
@@ -79,7 +79,7 @@ function Signin(){
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(validation(values))
-            axios.post('http://localhost:8081/signin', values)
+            axios.post('https://konnecct-server.onrender.com/signin', values)
             .then(res => {
                 if(res.data.Login){
                     navigate('/home')
