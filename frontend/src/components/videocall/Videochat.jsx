@@ -26,17 +26,15 @@ const Button = styled.button`
   font-size: 16px;
 `;
 
-const VideoChat = () => {
+const VideoChat = ({ targetUserId }) => {
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
-  const [localStream, setLocalStream] = useState(null);
-  const [remoteStream, setRemoteStream] = useState(null);
+  const [peerConnection, setPeerConnection] = useState(null);
 
   useEffect(() => {
     const startVideoChat = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        setLocalStream(stream);
         if (localVideoRef.current) {
           localVideoRef.current.srcObject = stream;
         }
@@ -49,19 +47,60 @@ const VideoChat = () => {
   }, []);
 
   useEffect(() => {
-    if (remoteVideoRef.current && remoteStream) {
+    if (remoteVideoRef.current) {
       remoteVideoRef.current.srcObject = remoteStream;
     }
   }, [remoteStream]);
 
-  const handleStartCall = () => {
-    // Code pour initier un appel vidéo ici
-    // Vous devrez utiliser votre propre logique pour établir la connexion avec l'autre utilisateur
+  const createPeerConnection = () => {
+    const pc = new RTCPeerConnection();
+
+    pc.ontrack = (event) => {
+      setRemoteStream(event.streams[0]);
+    };
+
+    pc.onicecandidate = (event) => {
+      if (event.candidate) {
+        // Envoyer l'ICE candidate à l'utilisateur distant
+      }
+    };
+
+    setPeerConnection(pc);
   };
 
-  const handleEndCall = () => {
-    // Code pour terminer l'appel vidéo ici
-    // Vous devrez utiliser votre propre logique pour fermer la connexion et arrêter les flux vidéo
+  const startCall = async () => {
+    if (!peerConnection) {
+      createPeerConnection();
+    }
+
+    try {
+      const offer = await peerConnection.createOffer();
+      await peerConnection.setLocalDescription(offer);
+
+      // Envoyer l'offre (SDP) à l'utilisateur distant
+    } catch (error) {
+      console.log('Erreur lors de la création de l'offre:', error);
+    }
+  };
+
+  const handleAnswer = async (answerSDP) => {
+    const remoteDesc = new RTCSessionDescription(answerSDP);
+
+    try {
+      await peerConnection.setRemoteDescription(remoteDesc);
+    } catch (error) {
+      console.log('Erreur lors de la configuration de la description distante:', error);
+    }
+  };
+
+  const handleIceCandidate = (candidate) => {
+    const iceCandidate = new RTCIceCandidate(candidate);
+
+    try {
+      peerConnection.addIceCandidate(iceCandidate);
+    } catch (error) {
+      console.log('Erreur lors de l\'ajout de l\'ICE candidate:', error);
+    }
   };
 
   return (
@@ -71,8 +110,7 @@ const VideoChat = () => {
         <Video playsInline ref={remoteVideoRef} autoPlay />
       </VideoContainer>
       <ButtonContainer>
-        <Button onClick={handleStartCall}>Démarrer l'appel</Button>
-        <Button onClick={handleEndCall}>Terminer l'appel</Button>
+        <Button onClick={startCall}>Démarrer l'appel</Button>
       </ButtonContainer>
     </>
   );
