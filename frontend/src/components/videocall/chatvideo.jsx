@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App = () => {
+const Vchat = () => {
   const classes = useStyles();
 
   return (
@@ -48,4 +48,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Vchat;
