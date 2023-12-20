@@ -10,6 +10,7 @@ const Container= Styled.div`
     align-items: center;
     height: 50vh;
     width: 100vw;
+    margin-bottom:10px;
     @media(max-width: 450px){
       flex-direction: column;
       height: none;
