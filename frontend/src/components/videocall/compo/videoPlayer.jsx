@@ -1,51 +1,53 @@
 import React, { useContext } from 'react';
-import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
+import { styled } from 'styled-components';
 
 import { SocketContext } from '../Context';
 
-const useStyles = makeStyles((theme) => ({
-  video: {
-    width: '550px',
+const Container = styled.div`
+  .video {
+    width: 550px;
     [theme.breakpoints.down('xs')]: {
-      width: '300px',
-    },
-  },
-  gridContainer: {
-    justifyContent: 'center',
+      width: 300px;
+    }
+  }
+  .gridContainer {
+    justify-content: center;
     [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column',
-    },
-  },
-  paper: {
-    padding: '10px',
-    border: '2px solid black',
-    margin: '10px',
-  },
-}));
+      flex-direction: column;
+    }
+  }
+  .paper {
+    padding: 10px;
+    border: 2px solid black;
+    margin: 10px;
+  }
+`;
 
 const VideoPlayer = () => {
   const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } = useContext(SocketContext);
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.gridContainer}>
+    <Container>
+    <div className="gridContainer">
       {stream && (
-        <Paper className={classes.paper}>
-          <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom>{name || 'Name'}</Typography>
-            <video playsInline muted ref={myVideo} autoPlay className={classes.video} />
-          </Grid>
-        </Paper>
+        <div className="paper">
+          <div>
+            <h5>{name || 'Name'}</h5>
+            <video playsInline muted ref={myVideo} autoPlay className="video" />
+          </div>
+        </div>
       )}
       {callAccepted && !callEnded && (
-        <Paper className={classes.paper}>
-          <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom>{call.name || 'Name'}</Typography>
-            <video playsInline ref={userVideo} autoPlay className={classes.video} />
-          </Grid>
-        </Paper>
+        <div className="paper">
+          <div>
+            <h5>{call.name || 'Name'}</h5>
+            <video playsInline ref={userVideo} autoPlay className="video" />
+          </div>
+        </div>
       )}
-    </Grid>
+    </div>
+    </Container>
   );
 };
 
