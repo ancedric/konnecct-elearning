@@ -108,15 +108,15 @@ function VideoChat() {
 
     // JSX
     return (
-        <div>
+        <div style={{ margin-top: '30px'}}>
             <h1 style={{ textAlign: 'center', color: '#000' }}>Live Classroom</h1>
             <div className="container">
                 <div className="video-container">
-                    <div className="video">
+                    <div className="video" style={{ border:'1px solid #000'}}>
                         {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: '300px' }} />}
                     </div>
                     {callAccepted && !callEnded ? (
-                          <div className="video">
+                          <div className="video" style={{ border:'1px solid #000'}}>
                              <video playsInline ref={userVideo} autoPlay style={{ width: '300px' }} />
                           </div>
                     ) : null}
