@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 import video from '../../assets/video/free-online-courses-with-free-certificates.mp4';
