@@ -29,6 +29,7 @@ const Container= Styled.div`
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       @media(max-width: 450px){
         width: 80%;
+        height: 25%;
       }
     }
     .title{
