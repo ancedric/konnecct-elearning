@@ -9,7 +9,7 @@ import Home from './components/home/index.jsx';
 import LoginBar from './components/loginBar/index.jsx'; 
 import Courses from './components/courses/courses.jsx'; 
 import ViewCourse from './components/courses/viewcourse.jsx'; 
-import VideoChat from './components/videocall/Videochat.jsx'; 
+import VChat from './components/videocall/chatvideo.jsx'; 
  
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +25,7 @@ root.render(
         <Route path="/courses" element={<Courses />} />
         <Route path="/view/:id" element={<ViewCourse />} />
         <Route path="/videochat" element={<VideoChat />} />
+        <Route path="/virtualclassroom" element={<VChat />} />
         
       </Routes>
     </Router>
