@@ -1,179 +1,122 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import Peer from 'simple-peer'
-import io from 'socket.io-client'
+import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
-const socket = io.connect("http://localhost:8081")
+const VideoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
 
-function VideoChat() {
-    // State variables
-    const [me, setMe] = useState('')
-    const [stream, setStream] = useState()
-    const [receivingCall, setReceivingCall] = useState(false)
-    const [caller, setCaller] = useState('')
-    const [callerSignal, setCallerSignal] = useState()
-    const [callAccepted, setCallAccepted] = useState(false)
-    const [idToCall, setIdToCall] = useState('')
-    const [callEnded, setCallEnded] = useState(false)
-    const [name, setName] = useState('')
-    const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([])
+const Video = styled.video`
+  width: 100%;
+  height: 100%;
+`;
 
-    // Refs
-    const myVideo = useRef()
-    const userVideo = useRef()
-    const connectionRef = useRef()
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+`;
 
-    // useEffect hook
-    useEffect(() => {
-        socket.current = io.connect('http://localhost:8081')
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
-            setStream(stream)
-            myVideo.current.srcObject = stream
-        })
+const Button = styled.button`
+  margin: 0 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+`;
 
-        socket.current.on('me', (id) => {
-            setMe(id)
-        })
+const VideoChat = ({ targetUserId }) => {
+  const localVideoRef = useRef(null);
+  const remoteVideoRef = useRef(null);
+  const [localStream, setLocalStream] = useState(null);
+  const [remoteStream, setRemoteStream] = useState(null);
+  const [peerConnection, setPeerConnection] = useState(null);
 
-        socket.current.on('callUser', (data) => {
-            setReceivingCall(true)
-            setCaller(data.from)
-            setName(data.name)
-            setCallerSignal(data.signal)
-        })
+  useEffect(() => {
+    const startVideoChat = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        setLocalStream(stream);
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = stream;
+        }
+      } catch (error) {
+        console.log('Erreur lors de l\'accès à la caméra et/ou au microphone:', error);
+      }
+    };
 
-        socket.current.on('message', (message) => {
-            setMessages((prevMessages) => [...prevMessages, message])
-        })
-    }, [])
+    startVideoChat();
+  }, []);
 
-    // Function to call a user
-    const callUser = (id) => {
-        const peer = new Peer({
-            initiator: true,
-            trickle: false,
-            stream: stream
-        })
-        peer.on('signal', (data) => {
-            socket.current.emit('callUser', {
-                userToCall: id,
-                signalData: data,
-                from: me,
-                name: name
-            })
-        })
-        peer.on('stream', (stream) => {
-            userVideo.current.srcObject = stream
-        })
+  useEffect(() => {
+    if (remoteVideoRef.current && remoteStream) {
+      remoteVideoRef.current.srcObject = remoteStream;
+    }
+  }, [remoteStream]);
 
-        socket.current.on('callAccepted', (signal) => {
-            setCallAccepted(true)
-            peer.signal(signal)
-        })
+  const createPeerConnection = () => {
+    const pc = new RTCPeerConnection();
 
-        connectionRef.current = peer
+    pc.ontrack = (event) => {
+      setRemoteStream(event.streams[0]);
+    };
+
+    pc.onicecandidate = (event) => {
+      if (event.candidate) {
+        // Envoyer l'ICE candidate à l'utilisateur distant
+      }
+    };
+
+    setPeerConnection(pc);
+  };
+
+  const startCall = async () => {
+    if (!peerConnection) {
+      createPeerConnection();
     }
 
-    // Function to answer a call
-    const answerCall = () => {
-        setCallAccepted(true)
-        const peer = new Peer({
-            initiator: false,
-            trickle: false,
-            stream: stream
-        })
-        peer.on('signal', (data) => {
-            socket.current.emit('answerCall', { signal: data, to: caller })
-        })
-        peer.on('stream', (stream) => {
-            userVideo.current.srcObject = stream
-        })
+    try {
+      const offer = await peerConnection.createOffer();
+      await peerConnection.setLocalDescription(offer);
 
-        peer.signal(callerSignal)
-        connectionRef.current = peer
+      // Envoyer l'offre (SDP) à l'utilisateur distant
+    } catch (error) {
+      console.log('Erreur lors de la création de l'offre:', error);
     }
+  };
 
-    // Function to leave a call
-    const leaveCall = () => {
-        setCallEnded(true)
-        connectionRef.current.destroy()
+  const handleAnswer = async (answerSDP) => {
+    const remoteDesc = new RTCSessionDescription(answerSDP);
+
+    try {
+      await peerConnection.setRemoteDescription(remoteDesc);
+    } catch (error) {
+      console.log('Erreur lors de la configuration de la description distante:', error);
     }
+  };
 
-    // Function to send a message
-    const sendMessage = () => {
-        socket.current.emit('message', message)
-        setMessage('')
+  const handleIceCandidate = (candidate) => {
+    const iceCandidate = new RTCIceCandidate(candidate);
+
+    try {
+      peerConnection.addIceCandidate(iceCandidate);
+    } catch (error) {
+      console.log('Erreur lors de l\'ajout de l\'ICE candidate:', error);
     }
+  };
 
-    // JSX
-    return (
-        <div style={{ margin-top: '30px'}}>
-            <h1 style={{ textAlign: 'center', color: '#000' }}>Live Classroom</h1>
-            <div className="container">
-                <div className="video-container">
-                    <div className="video" style={{ border:'1px solid #000'}}>
-                        {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: '300px' }} />}
-                    </div>
-                    {callAccepted && !callEnded ? (
-                          <div className="video" style={{ border:'1px solid #000'}}>
-                             <video playsInline ref={userVideo} autoPlay style={{ width: '300px' }} />
-                          </div>
-                    ) : null}
-                </div>
-                <div className="myId">
-                    <input type="text" id="filled-basic" label="Name" variant="filled" value={name} onChange={(e) => setName(e.target.value)} style={{ marginBottom: '20px' }} />
-                    <CopyToClipboard text={me} style={{ marginBottom: '2rem' }}>
-                        <button>
-                            Copy ID
-                        </button>
-                    </CopyToClipboard>
-                    <input type ="text" id="filled-basic" label="ID to call" variant="filled" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} style={{ marginBottom: '20px' }} />
-                    <div className="call-button">
-                        {callAccepted && !callEnded ? (
-                            <button onClick={leaveCall}>
-                                End Call
-                            </button>
-                        ) : (
-                            <button onClick={() => callUser(idToCall)}>
-                                Call
-                            </button>
-                        )}
-                        {idToCall}
-                    </div>
-                </div>
-                <div>
-                    {receivingCall && !callAccepted ? (
-                        <div className="caller">
-                            <h1>{name} is calling...</h1>
-                            <button onClick={answerCall}>
-                                Answer
-                            </button>
-                        </div>
-                    ) : null}
-                </div>
-                <div className="chat-container">
-                    <h2>Chat</h2>
-                    <div className="messages">
-                        {messages.map((message, index) => (
-                            <div key={index}>{message}</div>
-                        ))}
-                    </div>
-                    <div className="input-container">
-                        <input type= "text"
-                            id="filled-basic"
-                            label="Message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            />
-                        <button onClick={sendMessage}>
-                            Send
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+  return (
+    <>
+      <VideoContainer>
+        <Video playsInline muted ref={localVideoRef} autoPlay />
+        <Video playsInline ref={remoteVideoRef} autoPlay />
+      </VideoContainer>
+      <ButtonContainer>
+        <Button onClick={startCall}>Démarrer l'appel</Button>
+      </ButtonContainer>
+    </>
+  );
+};
 
 export default VideoChat;
