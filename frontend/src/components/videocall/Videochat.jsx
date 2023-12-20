@@ -30,7 +30,7 @@ const VideoChat = ({ targetUserId }) => {
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
   const [peerConnection, setPeerConnection] = useState(null);
-  const [remoteStream, setRemoteStream] = useState(null); // Nouvelle ligne
+  const [remoteStream, setRemoteStream] = useState(null);
 
   useEffect(() => {
     const startVideoChat = async () => {
@@ -84,25 +84,9 @@ const VideoChat = ({ targetUserId }) => {
     }
   };
 
-  const handleAnswer = async (answerSDP) => {
-    const remoteDesc = new RTCSessionDescription(answerSDP);
+  // Fonction handleAnswer supprimée
 
-    try {
-      await peerConnection.setRemoteDescription(remoteDesc);
-    } catch (error) {
-      console.log('Erreur lors de la configuration de la description distante:', error);
-    }
-  };
-
-  const handleIceCandidate = (candidate) => {
-    const iceCandidate = new RTCIceCandidate(candidate);
-
-    try {
-      peerConnection.addIceCandidate(iceCandidate);
-    } catch (error) {
-      console.log('Erreur lors de l\'ajout de l\'ICE candidate:', error);
-    }
-  };
+  // Fonction handleIceCandidate supprimée
 
   return (
     <>
