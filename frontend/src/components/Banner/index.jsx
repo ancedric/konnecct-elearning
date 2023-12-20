@@ -20,6 +20,7 @@ const SliderContainer= styled.div`
     background-image: linear-gradient(to right, #73AAFD, rgba(255,255,255,0));
     @media(max-width: 450px){
       flex-direction:column;
+      margin-bottom: 50px;
     }
   `
   const StyledSlideImage= styled.div`
