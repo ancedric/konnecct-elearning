@@ -29,7 +29,6 @@ const Button = styled.button`
 const VideoChat = ({ targetUserId }) => {
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
-  const [localStream, setLocalStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
   const [peerConnection, setPeerConnection] = useState(null);
 
@@ -83,26 +82,6 @@ const VideoChat = ({ targetUserId }) => {
       // Envoyer l'offre (SDP) à l'utilisateur distant
     } catch (error) {
       console.log('Erreur lors de la création de l\'offre:', error);
-    }
-  };
-
-  const handleAnswer = async (answerSDP) => {
-    const remoteDesc = new RTCSessionDescription(answerSDP);
-
-    try {
-      await peerConnection.setRemoteDescription(remoteDesc);
-    } catch (error) {
-      console.log('Erreur lors de la configuration de la description distante:', error);
-    }
-  };
-
-  const handleIceCandidate = (candidate) => {
-    const iceCandidate = new RTCIceCandidate(candidate);
-
-    try {
-      peerConnection.addIceCandidate(iceCandidate);
-    } catch (error) {
-      console.log('Erreur lors de l\'ajout de l\'ICE candidate:', error);
     }
   };
 
