@@ -23,7 +23,7 @@ const Container = styled.div`
   .image {
     margin-left: 15px;
   }
-  wrapper: {
+  .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
