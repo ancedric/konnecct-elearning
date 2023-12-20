@@ -10,7 +10,7 @@ const Container = styled.div`
     height: 50vh;
     margin-bottom:20px;
     @media(maxwidth:450px){
-        height: 100vh;
+        height: none;
     }
 
     .description{
