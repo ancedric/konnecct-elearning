@@ -9,6 +9,9 @@ const Container = styled.div`
     align-items: center;
     height: 50vh;
     margin-bottom:20px;
+    @media(maxwidth:450px){
+        height: 80vh;
+    }
 
     .description{
         display: flex;
