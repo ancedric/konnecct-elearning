@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 import video from '../../assets/video/free-online-courses-with-free-certificates.mp4';
@@ -12,7 +12,6 @@ const PlayerWrapper= styled.div`
     }
 `
 const InteractiveVideo = () => {
-    const videoRef = useRef(null);
     const url = {video};
 
    
