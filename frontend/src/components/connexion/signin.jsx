@@ -73,7 +73,7 @@ function Signin(){
       }
     })
     .catch(err => console.log(err))
-  },[])
+  },[navigate])
 
 
     const handleSubmit = (event) => {
