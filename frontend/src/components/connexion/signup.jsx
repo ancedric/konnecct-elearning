@@ -77,7 +77,7 @@ function Signup(){
         event.preventDefault();
         setErrors(validation(values));
             console.log(values);
-            axios.post(https://konnecct-server.onrender.com/signup', values)
+            axios.post('https://konnecct-server.onrender.com/signup', values)
             .then(res => 
                 {
                     console.log(res);
