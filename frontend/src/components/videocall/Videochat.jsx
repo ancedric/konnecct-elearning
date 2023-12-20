@@ -82,7 +82,7 @@ const VideoChat = ({ targetUserId }) => {
 
       // Envoyer l'offre (SDP) à l'utilisateur distant
     } catch (error) {
-      console.log('Erreur lors de la création de l'offre:', error);
+      console.log('Erreur lors de la création de l\'offre:', error);
     }
   };
 
