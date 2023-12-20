@@ -30,6 +30,7 @@ const VideoChat = ({ targetUserId }) => {
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
   const [peerConnection, setPeerConnection] = useState(null);
+  const [remoteStream, setRemoteStream] = useState(null); // Nouvelle ligne
 
   useEffect(() => {
     const startVideoChat = async () => {
@@ -47,7 +48,7 @@ const VideoChat = ({ targetUserId }) => {
   }, []);
 
   useEffect(() => {
-    if (remoteVideoRef.current) {
+    if (remoteVideoRef.current && remoteStream) {
       remoteVideoRef.current.srcObject = remoteStream;
     }
   }, [remoteStream]);
