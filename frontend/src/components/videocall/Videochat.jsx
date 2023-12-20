@@ -115,11 +115,11 @@ function VideoChat() {
                     <div className="video">
                         {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: '300px' }} />}
                     </div>
-                    <div className="video">
-                        {callAccepted && !callEnded ?
-                            <video playsInline ref={userVideo} autoPlay style={{ width: '300px' }} /> :
-                            null}
-                    </div>
+                    {callAccepted && !callEnded ? (
+                          <div className="video">
+                             <video playsInline ref={userVideo} autoPlay style={{ width: '300px' }} />
+                          </div>
+                    ) : null}
                 </div>
                 <div className="myId">
                     <input type="text" id="filled-basic" label="Name" variant="filled" value={name} onChange={(e) => setName(e.target.value)} style={{ marginBottom: '20px' }} />
