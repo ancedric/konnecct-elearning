@@ -6,44 +6,44 @@ import VideoPlayer from './compo/videoPlayer';
 import Sidebar from './compo/sidebar';
 import Notifications from './compo/notifications';
 
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    borderRadius: 15,
-    margin: '30px 100px',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '600px',
-    border: '2px solid black',
+const Container = styled.div`
+  .appBar {
+    border-radius: 15px;
+    margin: 30px 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    border: 2px solid black;
 
     [theme.breakpoints.down('xs')]: {
-      width: '90%',
-    },
-  },
-  image: {
-    marginLeft: '15px',
-  },
+      width: 90%;
+    }
+  }
+  .image {
+    margin-left: 15px;
+  }
   wrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%',
-  },
-}));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+`;
 
 const Vchat = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.wrapper}>
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography variant="h2" align="center">Video Chat</Typography>
-      </AppBar>
+   <Container> <div className="wrapper">
+      <div className="appBar">
+        <h2>Video Chat</h2>
+      </div>
       <VideoPlayer />
-      <Sidebar>
+      <div>
         <Notifications />
-      </Sidebar>
+      </div>
     </div>
   );
 };
