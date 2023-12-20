@@ -26,11 +26,11 @@ const Button = styled.button`
   font-size: 16px;
 `;
 
-const VideoChat = ({ targetUserId }) => {
+const VideoChat = () => {
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
+  const [localStream, setLocalStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
-  const [peerConnection, setPeerConnection] = useState(null);
 
   useEffect(() => {
     const startVideoChat = async () => {
@@ -54,35 +54,14 @@ const VideoChat = ({ targetUserId }) => {
     }
   }, [remoteStream]);
 
-  const createPeerConnection = () => {
-    const pc = new RTCPeerConnection();
-
-    pc.ontrack = (event) => {
-      setRemoteStream(event.streams[0]);
-    };
-
-    pc.onicecandidate = (event) => {
-      if (event.candidate) {
-        // Envoyer l'ICE candidate à l'utilisateur distant
-      }
-    };
-
-    setPeerConnection(pc);
+  const handleStartCall = () => {
+    // Code pour initier un appel vidéo ici
+    // Vous devrez utiliser votre propre logique pour établir la connexion avec l'autre utilisateur
   };
 
-  const startCall = async () => {
-    if (!peerConnection) {
-      createPeerConnection();
-    }
-
-    try {
-      const offer = await peerConnection.createOffer();
-      await peerConnection.setLocalDescription(offer);
-
-      // Envoyer l'offre (SDP) à l'utilisateur distant
-    } catch (error) {
-      console.log('Erreur lors de la création de l\'offre:', error);
-    }
+  const handleEndCall = () => {
+    // Code pour terminer l'appel vidéo ici
+    // Vous devrez utiliser votre propre logique pour fermer la connexion et arrêter les flux vidéo
   };
 
   return (
@@ -92,7 +71,8 @@ const VideoChat = ({ targetUserId }) => {
         <Video playsInline ref={remoteVideoRef} autoPlay />
       </VideoContainer>
       <ButtonContainer>
-        <Button onClick={startCall}>Démarrer l'appel</Button>
+        <Button onClick={handleStartCall}>Démarrer l'appel</Button>
+        <Button onClick={handleEndCall}>Terminer l'appel</Button>
       </ButtonContainer>
     </>
   );
