@@ -50,7 +50,7 @@ function VideoCall(){
             <div className="title-container">
                 <div className="title"><h3>Join your live class with your instructor via video chat</h3></div>
                 <div classNam="call-button">
-                <Link to='/videochat'><button className="button">Join class</button></Link>
+                <Link to='/virtualclass'><button className="button">Join class</button></Link>
                 </div> 
             </div>
             <div className="video-player-container">
