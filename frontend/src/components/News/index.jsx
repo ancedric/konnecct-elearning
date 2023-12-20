@@ -14,6 +14,7 @@ const Container= Styled.div`
     @media(max-width: 450px){
       flex-direction: column;
       height: none;
+      margin-bottom: 50px;
     }
 
     .card{
