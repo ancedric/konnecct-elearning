@@ -8,6 +8,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 50vh;
+    margin-bottom:20px;
 
     .description{
         display: flex;
