@@ -9,8 +9,8 @@ const Container = styled.div`
     align-items: center;
     height: 50vh;
     margin-bottom:20px;
-    @media(maxwidth:450px){
-        height: none;
+    @media(max-width:450px){
+        height: 100vh;
     }
 
     .description{
