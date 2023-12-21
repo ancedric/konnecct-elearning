@@ -25,7 +25,6 @@ const Container = styled.div`
 
 const VideoPlayer = () => {
   const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } = useContext(SocketContext);
-  const classes = useStyles();
 
   return (
     <Container>
