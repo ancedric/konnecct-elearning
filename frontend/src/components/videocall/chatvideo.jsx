@@ -32,7 +32,6 @@ const Container = styled.div`
 `;
 
 const Vchat = () => {
-  const classes = useStyles();
 
   return (
    <Container> <div className="wrapper">
