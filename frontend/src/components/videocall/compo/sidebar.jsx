@@ -64,7 +64,7 @@ const Sidebar = ({ children }) => {
                   Hang Up
                 </button>
               ) : (
-                <button/>} fullWidth onClick={() => callUser(idToCall)} className="margin">
+                <button fullWidth onClick={() => callUser(idToCall)} className="margin">
                   Call
                 </button>
               )}
