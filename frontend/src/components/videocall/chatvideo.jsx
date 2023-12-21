@@ -41,6 +41,7 @@ const Vchat = () => {
       <VideoPlayer />
       <div>
         <Notifications />
+         <Sidebar/>
       </div>
     </div>
     </Container>
