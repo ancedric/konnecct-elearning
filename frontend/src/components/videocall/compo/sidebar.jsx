@@ -39,7 +39,6 @@ const Container = styled.div`
 const Sidebar = ({ children }) => {
   const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
   const [idToCall, setIdToCall] = useState('');
-  const classes = useStyles();
 
   return (
     <Container>
