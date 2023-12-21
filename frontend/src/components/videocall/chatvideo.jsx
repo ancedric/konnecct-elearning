@@ -39,10 +39,9 @@ const Vchat = () => {
         <h2>Video Chat</h2>
       </div>
       <VideoPlayer />
-      <div>
+      <Sidebar>
         <Notifications />
-         <Sidebar/>
-      </div>
+      </Sidebar>
     </div>
     </Container>
   );
