@@ -44,6 +44,7 @@ const Vchat = () => {
         <Notifications />
       </div>
     </div>
+    </Container>
   );
 };
 
