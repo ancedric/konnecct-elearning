@@ -48,7 +48,7 @@ const Sidebar = ({ children }) => {
           <div className="gridContainer">
             <div className="padding">
               <h6>Account Info</h6>
-              <Tinput type= "text" label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
+              <input type= "text" label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
               <CopyToClipboard text={me} className="margin">
                 <button>
                   Copy Your ID
