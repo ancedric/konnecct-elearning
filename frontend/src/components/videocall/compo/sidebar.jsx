@@ -60,7 +60,7 @@ const Sidebar = ({ children }) => {
               <h6>Make a call</h6>
               <input type="text" label="ID to call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
               {callAccepted && !callEnded ? (
-                <button/>} fullWidth onClick={leaveCall} className="margin">
+                <button fullWidth onClick={leaveCall} className="margin">
                   Hang Up
                 </button>
               ) : (
